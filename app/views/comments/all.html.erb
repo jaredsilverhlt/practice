@@ -1,0 +1,21 @@
+<h1>All Comments: Page <%= @page %></h1>
+
+<% for i in 1..@pages %>
+	<%= "<a href=\"/admin/comments?page=#{i}\">#{i}</a>".html_safe %>
+<% end %>
+
+<table>
+	<tr>
+		<th>User</th>
+		<th>Comment</th>
+	</tr>
+
+	<% @comments.each do |comment| %>
+		<tr>
+			<td><%= comment.commenter %></td>
+			<td><%= comment.body %></td>
+			<td><%= link_to 'Article', article_path(comment.article) %></td>
+			<td><%= link_to 'Destroy', [comment.article, comment, :admin => true], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		</tr>
+	<% end %>
+</table>
